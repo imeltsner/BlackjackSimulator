@@ -1,1 +1,3 @@
 # Blackjack Simulator
+The goal of this project is to create a program that plays blackjack against an automated dealer program designed by my professor. Currently, my program is able to connect to the dealer program and play thousands of games before running out of money. I designed the program using a basic strategy guide and the HiLo card counting algorithm.
+I hope to extend this project by creating my own dealer program. Once this is done, I will add more card counting algorithms and compare which algorithms perform better. Ultimately, I would like to record the data from each algorithm in order to analyze and display the data. 
