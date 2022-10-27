@@ -102,7 +102,11 @@ class Player {
                 runningCount += 0;
             }
         }
-        trueCount = runningCount / (int) decksLeft;
+        if (decksLeft < 1) {
+            trueCount = runningCount;
+        } else {
+            trueCount = runningCount / (int) decksLeft;
+        }
         return trueCount;
     }
 
