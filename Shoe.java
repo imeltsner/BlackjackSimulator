@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+//a class to create a blackjack shoe of decks with n number of decks
 public class Shoe{
     private ArrayList<Card> shoe;
     Shoe() {
@@ -42,6 +43,7 @@ public class Shoe{
             return deck.get(index);
         }
     } //end class deck
+
     //shoe class methods
     public ArrayList<Card> createShoe(int numDecks) {
         Deck myDeck = new Deck();
