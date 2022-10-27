@@ -1,34 +1,35 @@
 import java.util.Random;
+import java.util.ArrayList;
 
 public class Deck {
     //creates a standard deck of 52 cards
-	Card deckOfCards[];
+	ArrayList<Card> deckOfCards;
 	Deck() {
-		deckOfCards = new Card[52];
+		deckOfCards = new ArrayList<Card>();
     }
-    Card[] createDeck() {
+    ArrayList<Card> createDeck() {
         int counter = 0;
 		int assignVal = 2;
 		while (counter < 13) { //space cards 2-Ace
-			deckOfCards[counter] = new Card(assignVal, "s");
+			deckOfCards.add(new Card(assignVal, "s"));
 			assignVal++;
 			counter++;
 	}
 		assignVal = 2;
 		while (counter < 26) { //heart cards 2-Ace
-			deckOfCards[counter] = new Card(assignVal, "h");
+			deckOfCards.add(new Card(assignVal, "h"));
 			assignVal++;
 			counter++;
 	}
 		assignVal = 2;
 		while (counter < 39) { //club cards 2-Ace
-			deckOfCards[counter] = new Card(assignVal, "c");
+			deckOfCards.add(new Card(assignVal, "c"));
 			assignVal++;
 			counter++;
 	}
 		assignVal = 2;
 		while (counter < 52) { //diamond cards 2-Ace
-			deckOfCards[counter] = new Card(assignVal, "d");
+			deckOfCards.add(new Card(assignVal, "d"));
 			assignVal++;
 			counter++;
 		}
@@ -36,19 +37,23 @@ public class Deck {
     }
 
     public void shuffle() {
+        //fischer-yates shuffle algorithm
         deckOfCards = createDeck();
         Random randomInt = new Random();
-        for (int i = deckOfCards.length - 1; i > 0; i--) {
+        for (int i = deckOfCards.size() - 1; i > 0; i--) {
             int swap = randomInt.nextInt(i+1);
-            Card temp = deckOfCards[swap];
-            deckOfCards[swap] = deckOfCards[i];
-            deckOfCards[i] = temp;
+            Card temp = deckOfCards.get(swap);
+            deckOfCards.set(swap, deckOfCards.get(i));
+            deckOfCards.set(i, temp);
         }
     }
+    /*(public Card[] deal(int numCards) {
+
+    }*/
 
     public void printDeck() {
         for (int i = 0; i < 52; i++) {
-            System.out.print(deckOfCards[i].print() + " ");
+            System.out.print(deckOfCards.get(i).print() + " ");
         }
     }
     
