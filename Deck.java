@@ -8,6 +8,7 @@ public class Deck {
 		deckOfCards = new ArrayList<Card>();
     }
     ArrayList<Card> createDeck() {
+        deckOfCards = new ArrayList<Card>();
         int counter = 0;
 		int assignVal = 2;
 		while (counter < 13) { //space cards 2-Ace
@@ -60,6 +61,9 @@ public class Deck {
     public static void main(String[] args) {
         Deck myDeck = new Deck();
         myDeck.createDeck();
+        myDeck.printDeck();
+        System.out.println();
+        myDeck.shuffle();
         myDeck.printDeck();
         System.out.println();
         myDeck.shuffle();
