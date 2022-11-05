@@ -8,7 +8,7 @@ public class Blackjack {
         String IpPort = args[1];
         String command = new String();
         Game game = new Game(IpAddress, IpPort);
-        Player myPlayer = new Player();
+        Player myPlayer = new HiLo();
         while (true) {
             try { //get command from dealer
                 command = game.read();
@@ -33,7 +33,6 @@ public class Blackjack {
                     catch (IOException e) {
                         System.out.println("ERROR");
                     }
-                    
                 } else { //some cards seen -> calculate optimal bet
                     String[] cards = Arrays.copyOfRange(commandArray, 3, commandArray.length);
                     int aBet = myPlayer.placeBet(cards);
@@ -58,7 +57,6 @@ public class Blackjack {
                 catch (IOException e) {
                     System.out.println("ERROR");
                 }
-                
             } else if (commandArray[0].equals("status")) {
                 System.out.println(command);
             } else if (commandArray[0].equals("done")) { //end game

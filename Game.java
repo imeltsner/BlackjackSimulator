@@ -21,7 +21,6 @@ public class Game {
         catch (IOException e) {
             System.err.println("IO Excepiton: " + e);
         }
-        
     }
     public void write(String s) throws IOException { //write to dealer
         dos.writeUTF(s);
