@@ -1,9 +1,9 @@
 //A class representing a human blackack player
-class Player {
+abstract class Player {
     //member variables
-    private int totalMoney;
-    private int handValue;
-    private boolean softTotal;
+    protected int totalMoney;
+    protected int handValue;
+    protected boolean softTotal;
     
     //constructor
     Player() {
@@ -11,7 +11,9 @@ class Player {
         handValue = 0;
         softTotal = false;
     }
-    
+    //abstract methods
+    abstract int countCards(String[] cards);
+
     //class methods
     public String[] getMyCards(String cards) {
         //creates array of single characters representing card values
@@ -22,7 +24,7 @@ class Player {
         }
         return myHand;
     }
-    private int getCardValue(String card) {
+    public int getCardValue(String card) {
         //calculates the value of a non-ace card
         String firstChar = card.split("")[0];
         if (firstChar.equals("K") || firstChar.equals("Q") || firstChar.equals("J") || firstChar.equals("1")) {
@@ -82,32 +84,6 @@ class Player {
                 }
             }
         }
-    }
-    private int countCards(String[] cards) {
-        //implements high low card counting strategy
-        //return true count representing ratio of high cards to low cards
-        //if true count <=1, odds not favorable
-        //if true count >1, odds favorable
-        int runningCount = 0;
-        int trueCount = 0;
-        int cardValue = 0;
-        long decksLeft = Math.round((double) (364 - cards.length) / (double) 52);
-        for (String card : cards) {
-            cardValue = getCardValue(card);
-            if (cardValue == 10 || cardValue == 11) {
-                runningCount -= 1;
-            } else if (cardValue <= 6) {
-                runningCount += 1;
-            } else {
-                runningCount += 0;
-            }
-        }
-        if (decksLeft < 1) {
-            trueCount = runningCount;
-        } else {
-            trueCount = runningCount / (int) decksLeft;
-        }
-        return trueCount;
     }
 
     public int placeBet(String[] cards) {
@@ -213,8 +189,6 @@ class Player {
                     }
                 } else if (handValue <= 8) {
                     return "hit";
-                } else {
-                    return "stand";
                 }
             } 
             //ace in hand
@@ -258,10 +232,12 @@ class Player {
         }
         return "stand";
     }
+
     public String[] processCommand(String command) {
         String[] splitCommand = command.split(":");
         return splitCommand;
     }
+
     public void subtractMoney(int amount) {
         totalMoney -= amount;
     }
