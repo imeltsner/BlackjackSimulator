@@ -1,6 +1,6 @@
 public class HiLo extends Player {
-    HiLo() {
-        super();
+    HiLo(String IP, String PORT) {
+        super(IP, PORT);
     }
 
     public int countCards(String[] cards) {

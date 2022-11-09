@@ -2,8 +2,8 @@
 //Source: https://www.casinoguardian.co.uk/blackjack/omega-ii-blackjack-system/
 
 public class OmegaII extends Player {
-    OmegaII() {
-        super();
+    OmegaII(String IP, String PORT) {
+        super(IP, PORT);
     }
     public int countCards(String[] cards) {
         int runningCount = 0;
