@@ -1,15 +1,37 @@
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.io.IOException; 
+import java.io.DataInputStream; 
+import java.io.DataOutputStream;
+
 //A class representing a human blackack player
+//Connect to dealer via socket
 abstract class Player {
     //member variables
     protected int totalMoney;
     protected int handValue;
     protected boolean softTotal;
+    protected DataInputStream dis;
+    protected DataOutputStream dos;
+    protected Socket socket;
     
     //constructor
-    Player() {
+    //takes IP address and port of the dealer server
+    Player(String Ip, String Port) {
         totalMoney = 500;
         handValue = 0;
         softTotal = false;
+        try {
+            socket = new Socket(Ip, Integer.valueOf(Port)); 
+            dis = new DataInputStream(socket.getInputStream()); 
+            dos = new DataOutputStream(socket.getOutputStream());
+        }
+        catch (UnknownHostException e) {
+            System.err.println("Unknown host: " + e);
+        }
+        catch (IOException e) {
+            System.err.println("IO Excepiton: " + e);
+        }
     }
     //abstract methods
     abstract int countCards(String[] cards);
@@ -240,5 +262,21 @@ abstract class Player {
 
     public void subtractMoney(int amount) {
         totalMoney -= amount;
+    }
+
+    public void write(String s) throws IOException { //write to dealer
+        dos.writeUTF(s);
+        dos.flush(); 
+    }
+    public String read() throws IOException { //read from dealer
+        return dis.readUTF();
+    }
+    public void endGame() { //end game
+        try{
+            socket.close();
+        }
+        catch (IOException e) {
+            System.out.println("ERROR");
+        }
     }
 }
