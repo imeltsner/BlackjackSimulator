@@ -6,23 +6,23 @@ import java.io.DataOutputStream;
 
 //A class representing a human blackack player
 //Connect to dealer via socket
-abstract class Player {
+abstract public class Player {
     //member variables
     protected int totalMoney;
     protected int handValue;
     protected boolean softTotal;
-    protected DataInputStream dis;
-    protected DataOutputStream dos;
-    protected Socket socket;
+    public DataInputStream dis;
+    public DataOutputStream dos;
+    public Socket socket;
     
     //constructor
     //takes IP address and port of the dealer server
-    Player(String Ip, String Port) {
+    Player(String IP, String PORT) {
         totalMoney = 500;
         handValue = 0;
         softTotal = false;
         try {
-            socket = new Socket(Ip, Integer.valueOf(Port)); 
+            socket = new Socket(IP, Integer.valueOf(PORT)); 
             dis = new DataInputStream(socket.getInputStream()); 
             dos = new DataOutputStream(socket.getOutputStream());
         }
@@ -268,9 +268,11 @@ abstract class Player {
         dos.writeUTF(s);
         dos.flush(); 
     }
+
     public String read() throws IOException { //read from dealer
         return dis.readUTF();
     }
+
     public void endGame() { //end game
         try{
             socket.close();
