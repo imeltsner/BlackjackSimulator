@@ -1,2 +1,2 @@
 # Blackjack Simulator
-The goal of this project is to create a program that simulates games of blackjack in order to determine the most effective card counting strategy. The dealer and player programs communicate via sockets. Each extension of the base Player class uses the same betting strategy, but a different card counting strategy. My hope is that by simulating thousands of hands, there will be some interesting variation in results based on the strategy used.
+A program to simulate games of blackjack using different card counting strategies. 
